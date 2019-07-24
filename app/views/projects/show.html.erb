@@ -1,0 +1,46 @@
+<h1><%= @project.name %> Project</h1>
+<h4>Owner: <%= link_to @project.user.name, user_path(@project.user) %></h4>
+<h4>Project status: <%= @project.status %></h4>
+<% if current_user == @project.user %>
+    <%= form_for @project do |f| %>
+    <div class="">
+      <%= f.label :status, 'Change status:'%>
+      <%= f.select :status, ['Proposed', 'Active', 'Done'], selected: 'Proposed' %>
+    </div>
+    <%= f.submit "Submit", :class => "" %>
+    <% end %>
+      <%= link_to 'Edit', edit_project_path %>
+<% end %>
+<p><%= @project.description %></p>
+
+<%# Tasks table, to in projects show page %>
+<table class="">
+  <tr>
+    <%# <th>Nom</th> %>
+    <th>Task name</th>
+    <th>Task</th>
+    <th>By</th>
+    <th>Status</th>
+    <th>Posted at</th>
+  </tr>
+  <% @project.tasks.each do |task| %>
+      <tr>
+        <td><%= task.name %></td>
+        <td><%= task.task %></td>
+        <td><%= task.user.name %></td>
+        <td><%= task.status %></td>
+        <td><%= task.created_at.strftime("%d/%m/%Y") %></td>
+        <% if user_signed_in? %>
+          <% if current_user == @project.user || current_user.admin %>
+              <td><%= link_to 'Edit', edit_project_task_path(@project, task) %></td>
+              <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'You sure??' } %></td>
+          <% end %>
+        <% end %>
+      </tr>
+  <% end %>
+  <% if user_signed_in? %>
+    <tr>
+    <%= render partial: 'tasks/form' %>
+    </tr>
+  <% end %>
+</table>

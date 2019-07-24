@@ -1,0 +1,19 @@
+<%= form_for @task do |f| %>
+
+  <div class="input-field col s6">
+      <%= f.label :name, 'Name'%>
+      <%= f.select :name, ['Analyse', 'Design DB', 'Design Front-End', 'Coding Back-End'] %>
+  </div>
+
+  <div class="input-field col s6">
+      <%= f.label :task, 'Task' %>
+      <%= f.text_field :task %>
+  </div>
+
+  <div class="input-field col s6">
+      <%= f.label :status, 'Status' %>
+      <%= f.select :status, ['Pending', 'In Progress', 'Done'], selected:'In Progress' %>
+  </div>
+  <%= f.button :submit, :class => "btn waves-effect waves-light", name: "project_id",value: @project_id %>
+  <%= link_to 'Back', request.referer  %>
+<% end %>

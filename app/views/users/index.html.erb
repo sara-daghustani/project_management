@@ -1,0 +1,22 @@
+<h1>Unauthorized access</h1>
+<%= link_to 'Back', projects_path %>
+<% if user_signed_in? %>
+  <% if current_user.admin %>
+    <h1>All the Users</h1>
+    
+    <br><br>
+    <table class="">
+      <tr>
+        <th>ID</th>
+        <th>User name</th>
+      </tr>
+      <% @users.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= link_to user.name, user_path(user) %></td>
+            <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'You sure??' } %></td>
+          </tr>
+      <% end %>
+    </table>
+    <% end %>
+  <% end %>
