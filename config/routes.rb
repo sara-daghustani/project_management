@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'homes#index'
   resources :homes
-  root 'projects#index'
+  # root 'projects#index'
   devise_for :users
   resources :users
   resources :tasks
