@@ -1,19 +1,21 @@
 <%= form_for @task do |f| %>
 
-  <div class="input-field col s6">
+  <div class="form-group">
       <%= f.label :name, 'Name'%>
       <%= f.select :name, ['Analyse', 'Design DB', 'Design Front-End', 'Coding Back-End'] %>
   </div>
 
-  <div class="input-field col s6">
+  <div class="form-group">
       <%= f.label :task, 'Task' %>
-      <%= f.text_field :task %>
+      <%= f.text_field :task, :class => "form-control" %>
   </div>
 
-  <div class="input-field col s6">
+  <div class="form-group">
       <%= f.label :status, 'Status' %>
       <%= f.select :status, ['Pending', 'In Progress', 'Done'], selected:'In Progress' %>
   </div>
-  <%= f.button :submit, :class => "btn waves-effect waves-light", name: "project_id",value: @project_id %>
-  <%= link_to 'Back', request.referer  %>
+
+  <%= f.button :submit, :class => "btn btn-success", name: "project_id",value: @project_id %>
+  <%= link_to 'Back', request.referer, class: "btn btn-primary"  %>
+
 <% end %>

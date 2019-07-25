@@ -1,3 +1,8 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+    
+
 <h1><%= @project.name %> Project</h1>
 <h4>Owner: <%= link_to @project.user.name, user_path(@project.user) %></h4>
 <h4>Project status: <%= @project.status %></h4>
@@ -7,34 +12,45 @@
       <%= f.label :status, 'Change status:'%>
       <%= f.select :status, ['Proposed', 'Active', 'Done'], selected: 'Proposed' %>
     </div>
-    <%= f.submit "Submit", :class => "" %>
+    <%= f.submit "Submit New Status", :class => "btn btn-light" %>
     <% end %>
-      <%= link_to 'Edit', edit_project_path %>
+      <%= link_to 'Edit Project', edit_project_path, class: "btn btn-light" %>
 <% end %>
 <p><%= @project.description %></p>
+    </div>
 
-<%# Tasks table, to in projects show page %>
-<table class="">
-  <tr>
-    <%# <th>Nom</th> %>
-    <th>Task name</th>
-    <th>Task</th>
-    <th>By</th>
-    <th>Status</th>
-    <th>Posted at</th>
-  </tr>
+    <div class="col">
+    <table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <%# <th>Nom</th> %>
+      <th>Task name</th>
+      <th>Task</th>
+      <th>By</th>
+      <th>Status</th>
+      <th>Posted at</th>
+      <th>Edit</th>
+      <th>Destroy</th>
+      <th>Create</th>
+    </tr>
+  </thead>
+  <tbody>
   <% @project.tasks.each do |task| %>
       <tr>
-        <td><%= task.name %></td>
+        <td scope="row"><%= task.name %></td>
         <td><%= task.task %></td>
         <td><%= task.user.name %></td>
         <td><%= task.status %></td>
         <td><%= task.created_at.strftime("%d/%m/%Y") %></td>
         <% if user_signed_in? %>
-          <% if current_user == @project.user || current_user.admin %>
+          <% if current_user == @project.user %>
               <td><%= link_to 'Edit', edit_project_task_path(@project, task) %></td>
               <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'You sure??' } %></td>
+          <% else %>
+              <td></td>
+              <td></td>
           <% end %>
+          <td></td>
         <% end %>
       </tr>
   <% end %>
@@ -42,5 +58,9 @@
     <tr>
     <%= render partial: 'tasks/form' %>
     </tr>
+  </tbody>
   <% end %>
 </table>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,6 @@ class ProjectsController < ApplicationController
     
     def index
         @projects = Project.all.order(:id)
-        users = User.all.order(:id)
     end
 
     def edit

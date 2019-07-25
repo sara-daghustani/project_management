@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PM</title>
+    <title>Project Management</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,12 +10,7 @@
   </head>
 
   <body>
-  <% if user_signed_in?%>
-    <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Login", new_user_session_path %>
-    <%= link_to "SignUp", new_user_registration_path %>
-  <% end %>
+    <%= render 'layouts/nav' %>
     <%= yield %>
   </body>
 </html>

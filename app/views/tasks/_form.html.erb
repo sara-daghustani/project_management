@@ -1,9 +1,10 @@
 <%= form_with(model: [ @project, @project.tasks.build ], local: true) do |f| %>
-    <%# <td><%= f.label "Nom" </td> %>
     <td><%= f.select :name, ['Analyse', 'Design DB', 'Design Front-End', 'Coding Back-End'] %></td>
     <td><%= f.text_field :task %></td>
     <td><%= f.label current_user.username %></td>
     <td><%= f.select :status, ['Pending', 'In Progress', 'Done'], selected:'In Progress' %></td>
     <td><%= f.label Time.now.strftime("%d/%m/%Y") %></td>
+    <td></td>
+    <td></td>
     <td><%= f.submit "Submit" %></td>
 <% end %>
