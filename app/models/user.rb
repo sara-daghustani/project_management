@@ -11,5 +11,5 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
   validates :admin, absence: true
   validates :email, :name, :username, :years_exp, :prog_lang, :country, presence: true
-  validates :email, :name, :username, :prog_lang, :country, numericality: false
+  # validates :email, :name, :username, :prog_lang, :country, numericality: false
 end
